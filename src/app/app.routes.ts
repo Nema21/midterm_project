@@ -5,6 +5,8 @@ import { PropertyComponent } from './interpolation/property/property.component';
 import { EventComponent } from './interpolation/event/event.component';
 import { TwoWayComponent } from './interpolation/two-way/two-way.component';
 import { ProductsComponent } from './products/products.component';
+import { ProdListComponent } from './prodManagement/prod-list/prod-list.component';
+import { ViewDetailsComponent } from './prodManagement/view-details/view-details.component';
 
 export const routes: Routes = [
     {path:'home', component: HomeComponent},
@@ -12,5 +14,14 @@ export const routes: Routes = [
     {path:'property', component: PropertyComponent},
     {path:'event', component: EventComponent},
     {path:'two-way', component: TwoWayComponent},
-    {path:'products', component: ProductsComponent}
+    {path:'products', component: ProductsComponent},
+    {path: 'productList', component:ProdListComponent,
+        children:[{
+            path: ':id',
+            children: [
+                {path:'viewDetails/:id', component: ViewDetailsComponent},
+                
+            ]
+        }]
+    }
 ];
