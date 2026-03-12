@@ -1,62 +1,34 @@
-<h2>Products List</h2>
-<input [(ngModel)]="searchTerm"
-placeholder="Seach by name, Product..."
-class="search-input"/>
+<div class="container">
+  <h2>Products List</h2>
+  
+  <input [(ngModel)]="searchTerm"
+         placeholder="Search by product..."
+         class="search-input">
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    @for(product of products; track product.id){
-    <tr>
-      <td>{{product.id}}</td>
-      <td>{{product.name}}</td>
-      <td>{{product.status}}</td>
-      <td>
-        <a [routerLink]="['/prodManagement/view-details', p.id,'details']" class="btn-view" (onclick)="getProduct"(product)>View</a>
-      </td>
-    </tr>
-    }
-  </tbody>
-</table>
-
-@if(showModal){
-
-<div class="modal-overlay" (click)="closeModal()">
-
-  <div class="modal-content" (click)="$event.stopPropagation()">
-
-    <button class="close-btn" (click)="closeModal()">X</button>
-
-    @if(selectedProduct){
-
-    <h3>Product Details</h3>
-
-    <p><b>ID:</b> {{selectedProduct.id}}</p>
-    <p><b>Name:</b> {{selectedProduct.name}}</p>
-    <p><b>Category:</b> {{selectedProduct.category}}</p>
-    <p><b>Price:</b> {{selectedProduct.price}}</p>
-    <p><b>Stock:</b> {{selectedProduct.stock}}</p>
-    <p><b>Status:</b> {{selectedProduct.status}}</p>
-    <p><b>Brand:</b> {{selectedProduct.brand}}</p>
-    <p><b>Rating:</b> {{selectedProduct.rating}}</p>
-    <p><b>Supplier:</b> {{selectedProduct.supplier}}</p>
-    <p><b>Description:</b> {{selectedProduct.description}}</p>
-
-    }
-    <td>
-        <a [routerLink]="['/prodManagement/view-details', p.id,'details']" class="btn-view" (onclick)="getProduct"(product)>View</a>
-    </td>
-
-  </div>
-
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Status</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(product of filteredProducts; track product.id){
+      <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.status}}</td>
+        <td style="text-align: center;">
+          <a [routerLink]="['/prodManagement/view-details', product.id, 'details']" 
+             class="btn-view" 
+             (click)="getProduct(product)">
+             View Details
+          </a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
-
-}

@@ -1,5 +1,84 @@
-<div class="container mt-4">
-@if(product){
+<div class="container">
+  @if(product){
+  <div class="product-card">
+    <div class="card-header">
+      <h3 class="header-title">Product Details</h3>
+      @if(!isEditing) {
+        <button class="btn-action" (click)="toggleEdit()">Edit</button>
+      }
+    </div>
 
-}
+    <div class="detail-grid">
+      <div class="field">
+        <label>ID:</label>
+        <span class="static-text">{{product.id}}</span>
+      </div>
+
+      <div class="field">
+        <label>Name:</label>
+        @if(isEditing){ <input [(ngModel)]="product.name" class="edit-input"> } 
+        @else { <span class="static-text gray-text">{{product.name}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Category:</label>
+        @if(isEditing){ <input [(ngModel)]="product.category" class="edit-input"> } 
+        @else { <span class="static-text gray-text">{{product.category}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Price:</label>
+        @if(isEditing){ <input type="number" [(ngModel)]="product.price" class="edit-input"> } 
+        @else { <span class="static-text price-text">${{product.price | number:'1.2-2'}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Stock:</label>
+        @if(isEditing){ <input type="number" [(ngModel)]="product.stock" class="edit-input"> } 
+        @else { <span class="static-text gray-text">{{product.stock}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Status:</label>
+        @if(isEditing){
+          <select [(ngModel)]="product.status" class="edit-input">
+            <option value="Available">Available</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+        } @else { <span class="status-badge">{{product.status}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Brand:</label>
+        @if(isEditing){ <input [(ngModel)]="product.brand" class="edit-input"> } 
+        @else { <span class="static-text gray-text">{{product.brand}}</span> }
+      </div>
+
+      <div class="field">
+        <label>Rating:</label>
+        @if(isEditing){ <input type="number" [(ngModel)]="product.rating" class="edit-input"> } 
+        @else { <span class="static-text gray-text">⭐ {{product.rating}}</span> }
+      </div>
+    </div>
+
+    <div class="description-section">
+      <label>Description:</label>
+      @if(isEditing){ <textarea [(ngModel)]="product.description" class="edit-input"></textarea> } 
+      @else { <p class="static-text gray-text">{{product.description}}</p> }
+    </div>
+
+    <div class="actions">
+      @if(isEditing){
+        <button (click)="save()" class="btn-save">Save</button>
+        <button (click)="toggleEdit()" class="btn-cancel">Cancel</button>
+      } @else {
+      <a [routerLink]="['/products-list']" class="btn-back">← Back to List</a>
+      }
+    </div>
+
+    @if(saved){
+      <div class="save-toast">Changes saved successfully!</div>
+    }
+  </div>
+  }
 </div>

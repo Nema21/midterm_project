@@ -136,4 +136,8 @@ export class ProductService {
   getProductById(id: number) {
     return this.products.find(p => p.id === id);
   }
+  updateProduct(updated: Product): void {
+    const idx = this.products.findIndex(p => p.id === updated.id);
+    if(idx !== -1) this.products[idx] = { ...updated};
+  }
 }

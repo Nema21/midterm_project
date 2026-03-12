@@ -15,13 +15,19 @@ export const routes: Routes = [
     {path:'event', component: EventComponent},
     {path:'two-way', component: TwoWayComponent},
     {path:'products', component: ProductsComponent},
-    {path: 'productList', component:ProdListComponent,
-        children:[{
+    { path: 'prodManagement/view-details/:id/details', component: ViewDetailsComponent },
+    { path: 'products-list', component: ProdListComponent },
+  { path: '', redirectTo: 'products-list', pathMatch: 'full' },
+  {path:'prod-list',
+    component: ProdListComponent,
+    children:[
+        {
             path: ':id',
             children: [
-                {path:'viewDetails/:id', component: ViewDetailsComponent},
-                
+                {path: 'details', component: ViewDetailsComponent}
             ]
-        }]
-    }
+        }
+    ]
+  }
+     
 ];
